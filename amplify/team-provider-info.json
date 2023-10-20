@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "argumentsandfacts14a21475": {}
+      },
+      "api": {
+        "argumentsandfacts": {}
+      },
+      "storage": {
+        "imagestorage": {}
       }
     }
   }
