@@ -1,5 +1,17 @@
+body {
+  background-color: #282c34;
+}
+
 .App {
-  text-align: center;
+  text-align: left;
+  background-color: rgb(255, 255, 255);
+  margin: 1em;
+  padding: 1em;
+}
+
+.App .amplify-button {
+    margin: 1em;
+    float: right;
 }
 
 .App-logo {

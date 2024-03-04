@@ -10,7 +10,7 @@ import {
   Text,
   TextField,
   View,
-  withAuthenticator,
+  Authenticator,
 } from "@aws-amplify/ui-react";
 import { listNotes } from "./graphql/queries";
 import {
@@ -20,6 +20,7 @@ import {
 
 const App = ({ signOut }) => {
   const [notes, setNotes] = useState([]);
+  const [sign, setSign] = useState([]);
 
   useEffect(() => {
     fetchNotes();
@@ -68,67 +69,79 @@ const App = ({ signOut }) => {
     });
   }
 
+  function showSignIn() {
+    setSign(!sign);
+  }
+
   return (
-    <View className="App">
-      <Heading level={1}>Leave a note</Heading>
-      <View as="form" margin="3rem 0" onSubmit={createNote}>
-        <Flex direction="row" justifyContent="center">
-          <TextField
-            name="name"
-            placeholder="Note Name"
-            label="Note Name"
-            labelHidden
-            variation="quiet"
-            required
-          />
-          <TextField
-            name="description"
-            placeholder="Note Description"
-            label="Note Description"
-            labelHidden
-            variation="quiet"
-            required
-          />
-          <View
-            name="image"
-            as="input"
-            type="file"
-            style={{ alignSelf: "end" }}
-          />
-          <Button type="submit" variation="primary">
-            Create Note
-          </Button>
-        </Flex>
+
+    <div>
+      <View className="App">
+        {!sign && <Button onClick={showSignIn}>Sign In</Button>}
+        <Authenticator socialProviders={['amazon', 'apple', 'facebook', 'google']}>
+          {({ signOut, user }) => (
+            sign && <><Button onClick={signOut}>Sign Out</Button>
+              <div style={{}}>
+                <Heading level={1}>Make your statment! Support it with arguments and facts!</Heading>
+                <View as="form" margin="3rem 0" onSubmit={createNote}>
+                  <Flex direction="column" justifyContent="left">
+                    <TextField
+                      name="name"
+                      placeholder="Statment"
+                      label="Statment"
+                      labelHidden
+                      variation="quiet"
+                      required />
+                    <TextField
+                      name="description"
+                      placeholder="Argemnet & Facts"
+                      label="Argemnet"
+                      labelHidden
+                      variation="quiet"
+                      required />
+                    <View
+                      name="image"
+                      as="input"
+                      type="file"
+                      placeholder="Add Image"
+                      style={{}} />
+                    <Button type="submit" variation="primary">
+                      Publish Statment
+                    </Button>
+                  </Flex>
+                </View>
+              </div></>
+          )}
+        </Authenticator>
+        <View margin="3rem 0" style={{}}>
+          <Heading level={2}>Latest Statments</Heading>
+          {notes.map((note) => (
+            <Flex
+              key={note.id || note.name}
+              direction="row"
+              justifyContent="left"
+              alignItems="center"
+            >
+              <Text as="strong" fontWeight={700}>
+                {note.name}
+              </Text>
+              <Text as="span">{note.description}</Text>
+              {note.image && (
+                <Image
+                  src={note.image}
+                  alt={`visual aid for ${notes.name}`}
+                  style={{ width: 400 }}
+                />
+              )}
+              <Button variation="link" onClick={() => deleteNote(note)}>
+                Delete Statment
+              </Button>
+            </Flex>
+          ))}
+        </View>
       </View>
-      <Heading level={2}>Latest Notes</Heading>
-      <View margin="3rem 0">
-      {notes.map((note) => (
-          <Flex
-            key={note.id || note.name}
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Text as="strong" fontWeight={700}>
-              {note.name}
-            </Text>
-            <Text as="span">{note.description}</Text>
-            {note.image && (
-              <Image
-                src={note.image}
-                alt={`visual aid for ${notes.name}`}
-                style={{ width: 400 }}
-              />
-            )}
-            <Button variation="link" onClick={() => deleteNote(note)}>
-              Delete note
-            </Button>
-          </Flex>
-        ))}
-      </View>
-      <Button onClick={signOut}>Sign Out</Button>
-    </View>
+    </div>
   );
 };
 
-export default withAuthenticator(App);
+export default App;
