@@ -9,11 +9,7 @@
       "apiKeyExpirationDate": "2026-10-27T21:23:59.247Z",
       "keyDescription": ""
     },
-    "conflictResolution": {
-      "defaultResolutionStrategy": {
-        "type": "AUTOMERGE"
-      }
-    },
+    "conflictResolution": {},
     "additionalAuthTypes": []
   }
 }
