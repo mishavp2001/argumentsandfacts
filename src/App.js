@@ -77,12 +77,40 @@ const App = ({ signOut }) => {
 
     <div>
       <View className="App">
-        {!sign && <Button onClick={showSignIn}>Sign In</Button>}
+        {!sign
+        && <Heading level={1}>This platform offers unrestricted freedom of speech to everyone, free of charge! You can sign up using your IP address and engage in discussions on any topic without fear of persecution. We acknowledge that political parties and nations often manipulate news and facts to suit their agendas. Therefore, seize this opportunity to express your views and ensure your voice is heard loud and clear!</Heading>
+        && <Button onClick={showSignIn}>Sign In</Button>
+        }
+        <View margin="3rem 0" style={{}}>
+          <Heading level={2}>Latest Statments</Heading>
+          {notes.map((note) => (
+            <Flex
+              key={note.id || note.name}
+              direction="row"
+              justifyContent="left"
+              alignItems="center"
+            >
+              <Text as="strong" fontWeight={700}>
+                {note.name}
+              </Text>
+              <Text as="span">{note.description}</Text>
+              {note.image && (
+                <Image
+                  src={note.image}
+                  alt={`visual aid for ${notes.name}`}
+                  style={{ width: 400 }}
+                />
+              )}
+              <Button variation="link" onClick={() => deleteNote(note)}>
+                Delete Statment
+              </Button>
+            </Flex>
+          ))}
+        </View>
         <Authenticator socialProviders={['amazon', 'apple', 'facebook', 'google']}>
           {({ signOut, user }) => (
             sign && <><Button onClick={signOut}>Sign Out</Button>
               <div style={{}}>
-                <Heading level={1}>This platform offers unrestricted freedom of speech to everyone, free of charge! You can sign up using your IP address and engage in discussions on any topic without fear of persecution. We acknowledge that political parties and nations often manipulate news and facts to suit their agendas. Therefore, seize this opportunity to express your views and ensure your voice is heard loud and clear!</Heading>
                 <View as="form" margin="3rem 0" onSubmit={createNote}>
                   <Flex direction="column" justifyContent="left">
                     <TextField
@@ -113,32 +141,6 @@ const App = ({ signOut }) => {
               </div></>
           )}
         </Authenticator>
-        <View margin="3rem 0" style={{}}>
-          <Heading level={2}>Latest Statments</Heading>
-          {notes.map((note) => (
-            <Flex
-              key={note.id || note.name}
-              direction="row"
-              justifyContent="left"
-              alignItems="center"
-            >
-              <Text as="strong" fontWeight={700}>
-                {note.name}
-              </Text>
-              <Text as="span">{note.description}</Text>
-              {note.image && (
-                <Image
-                  src={note.image}
-                  alt={`visual aid for ${notes.name}`}
-                  style={{ width: 400 }}
-                />
-              )}
-              <Button variation="link" onClick={() => deleteNote(note)}>
-                Delete Statment
-              </Button>
-            </Flex>
-          ))}
-        </View>
       </View>
     </div>
   );
