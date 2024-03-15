@@ -78,7 +78,6 @@ const App = ({ signOut }) => {
     <div>
       <View className="App">
         {!sign
-        && <Heading level={1}>This platform offers unrestricted freedom of speech to everyone, free of charge! You can sign up using your IP address and engage in discussions on any topic without fear of persecution. We acknowledge that political parties and nations often manipulate news and facts to suit their agendas. Therefore, seize this opportunity to express your views and ensure your voice is heard loud and clear!</Heading>
         && <Button onClick={showSignIn}>Sign In</Button>
         }
         <View margin="3rem 0" style={{}}>
@@ -109,7 +108,8 @@ const App = ({ signOut }) => {
         </View>
         <Authenticator socialProviders={['amazon', 'apple', 'facebook', 'google']}>
           {({ signOut, user }) => (
-            sign && <><Button onClick={signOut}>Sign Out</Button>
+            !signin && <Heading level={1}>This platform offers unrestricted freedom of speech to everyone, free of charge! You can sign up using your IP address and engage in discussions on any topic without fear of persecution. We acknowledge that political parties and nations often manipulate news and facts to suit their agendas. Therefore, seize this opportunity to express your views and ensure your voice is heard loud and clear!</Heading>
+            && sign && <><Button onClick={signOut}>Sign Out</Button>
               <div style={{}}>
                 <View as="form" margin="3rem 0" onSubmit={createNote}>
                   <Flex direction="column" justifyContent="left">
