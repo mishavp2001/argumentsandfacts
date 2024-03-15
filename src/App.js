@@ -82,7 +82,7 @@ const App = ({ signOut }) => {
           {({ signOut, user }) => (
             sign && <><Button onClick={signOut}>Sign Out</Button>
               <div style={{}}>
-                <Heading level={1}>Make your statment! Support it with arguments and facts!</Heading>
+                <Heading level={1}>This platform offers unrestricted freedom of speech to everyone, free of charge! You can sign up using your IP address and engage in discussions on any topic without fear of persecution. We acknowledge that political parties and nations often manipulate news and facts to suit their agendas. Therefore, seize this opportunity to express your views and ensure your voice is heard loud and clear!</Heading>
                 <View as="form" margin="3rem 0" onSubmit={createNote}>
                   <Flex direction="column" justifyContent="left">
                     <TextField
