@@ -1,5 +1,5 @@
 body {
-  background-color: #282c34;
+  background-color: #2964a3;
 }
 
 .App {
@@ -7,6 +7,13 @@ body {
   background-color: rgb(255, 255, 255);
   margin: 1em;
   padding: 1em;
+}
+
+.auth-button {
+  padding: 2px;
+  width: 90px;
+  border-radius: 2em;
+  position: absolute;
 }
 
 .App .amplify-button {

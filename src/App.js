@@ -5,7 +5,13 @@ import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
 import {
   Authenticator,
-  Heading
+  Alert,
+  Button,
+  Grid,
+  Flex,
+  useTheme,
+  View
+
 } from "@aws-amplify/ui-react";
 import { Auth } from "aws-amplify";
 import Notes from "./components/Notes"
@@ -19,8 +25,11 @@ const Title = styled("h1")`
 `;
 
 const App = ({ signOut }) => {
- 
+  const { tokens } = useTheme();
+
   const [state, setState] = useState({ isLoggedIn: false, user: null });
+
+
 
   const checkLoggedIn = () => {
     Auth.currentAuthenticatedUser()
@@ -35,24 +44,55 @@ const App = ({ signOut }) => {
     checkLoggedIn();
   }, []);
 
+const SignOutButton = styled(Button)`
+  background-color: #74b49b;
+  cursor: pointer;
+`;
 
 
-  
   return state.isLoggedIn ? (
-    <Notes />
-  ) : (
     <>
-      <Title>Articles</Title>
-      <Heading level={1}>This platform offers unrestricted freedom of speech to everyone, free of charge! You can sign up using your IP address and engage in discussions on any topic without fear of persecution. We acknowledge that political parties and nations often manipulate news and facts to suit their agendas. Therefore, seize this opportunity to express your views and ensure your voice is heard loud and clear!
-      </Heading>
-      <Authenticator
-       socialProviders={['amazon', 'apple', 'facebook', 'google']}
-        onStateChange={authState => {
-          if (authState === "signedIn") {
-            checkLoggedIn();
-          }
+      <SignOutButton
+        onClick={() => {
+          Auth.signOut().then(() => window.location.reload());
         }}
-      />
+      >
+        Sign Out
+      </SignOutButton>
+      <Notes />
+    </>
+
+  ) : (
+    <>      
+      <Grid templateColumns={{ base: "1fr 0", medium: "1fr 1fr" }}>
+    
+      <Flex
+        direction='column'
+        backgroundColor="hsl(185.69deg 19.2% 52.67%"
+        justifyContent="center"
+      >
+                <Alert style={{ backgroundColor: 'yellow', 'margin': '20px' }}>
+    <h3>This platform offers unrestricted freedom of speech to everyone, free of charge! You can sign up using your IP address and engage in discussions on any topic without fear of persecution. <br />
+      We acknowledge that political parties and nations often manipulate news and facts to suit their agendas.
+      Therefore, seize this opportunity to express your views and ensure your voice is heard
+      loud and clear!</h3>
+  </Alert>
+        <Authenticator
+          socialProviders={['amazon', 'apple', 'facebook', 'google']}
+          onStateChange={authState => {
+            if (authState === "signedIn") {
+              checkLoggedIn();
+            }
+          }}
+        />
+
+      </Flex>
+      <View height="100vh" padding="20px">
+        <Notes />
+      </View>
+    </Grid>
+
+      
     </>
   );
 };

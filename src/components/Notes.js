@@ -16,34 +16,6 @@ import {
   } from "../graphql/mutations";
   import { API } from "aws-amplify";
 
-
-const Header = styled("div")`
-  background-color: #ffffff;
-  padding-left: 16px;
-  padding-right: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  right: 0;
-  left: 0;
-  height: 80px;
-  z-index: 2;
-`;
-
-const Title = styled("h1")`
-  margin-top: 0;
-  margin-bottom: 0;
-  text-transform: uppercase;
-  color: #74b49b;
-  font-size: 24px;
-`;
-
-const SignOutButton = styled(Button)`
-  background-color: #74b49b;
-  cursor: pointer;
-`;
-
 const Notes = () => {
   const [notes, setNotes] = useState([]);
   async function fetchNotes() {
@@ -95,16 +67,7 @@ const Notes = () => {
 
   return (
     <>
-      <Header>
-        <Title>Articles</Title>
-        <SignOutButton
-          onClick={() => {
-            Auth.signOut().then(() => window.location.reload());
-          }}
-        >
-          Sign Out
-        </SignOutButton>
-      </Header>
+      <h1>Articles</h1>
       <View className="App">
   <View margin="3rem 0" style={{}}>
     {notes.map((note) => (
