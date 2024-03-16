@@ -42,7 +42,7 @@ const App = ({ signOut }) => {
 
   useEffect(() => {
     checkLoggedIn();
-  }, []);
+  }, [isLoggedIn]);
 
   const SignOutButton = styled(Button)`
   background-color: #74b49b;
