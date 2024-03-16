@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from "@emotion/styled";
-import { Auth } from "aws-amplify";
+import { API, Storage } from 'aws-amplify';
 import {
     Button,
     Flex,
@@ -14,7 +13,6 @@ import {
     createNote as createNoteMutation,
     deleteNote as deleteNoteMutation,
   } from "../graphql/mutations";
-  import { API } from "aws-amplify";
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);

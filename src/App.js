@@ -44,7 +44,7 @@ const App = ({ signOut }) => {
     checkLoggedIn();
   }, []);
 
-const SignOutButton = styled(Button)`
+  const SignOutButton = styled(Button)`
   background-color: #74b49b;
   cursor: pointer;
 `;
@@ -63,36 +63,36 @@ const SignOutButton = styled(Button)`
     </>
 
   ) : (
-    <>      
+    <>
       <Grid templateColumns={{ base: "1fr 0", medium: "1fr 1fr" }}>
-    
-      <Flex
-        direction='column'
-        backgroundColor="hsl(185.69deg 19.2% 52.67%"
-        justifyContent="center"
-      >
-                <Alert style={{ backgroundColor: 'yellow', 'margin': '20px' }}>
-    <h3>This platform offers unrestricted freedom of speech to everyone, free of charge! You can sign up using your IP address and engage in discussions on any topic without fear of persecution. <br />
-      We acknowledge that political parties and nations often manipulate news and facts to suit their agendas.
-      Therefore, seize this opportunity to express your views and ensure your voice is heard
-      loud and clear!</h3>
-  </Alert>
-        <Authenticator
-          socialProviders={['amazon', 'apple', 'facebook', 'google']}
-          onStateChange={authState => {
-            if (authState === "signedIn") {
-              checkLoggedIn();
-            }
-          }}
-        />
 
-      </Flex>
-      <View height="100vh" padding="20px">
-        <Notes />
-      </View>
-    </Grid>
+        <Flex
+          direction='column'
+          backgroundColor="hsl(185.69deg 19.2% 52.67%"
+          justifyContent="center"
+        >
+          <Alert style={{ backgroundColor: 'yellow', 'margin': '20px' }}>
+            <h3>This platform offers unrestricted freedom of speech to everyone, free of charge! You can sign up using your IP address and engage in discussions on any topic without fear of persecution. <br />
+              We acknowledge that political parties and nations often manipulate news and facts to suit their agendas.
+              Therefore, seize this opportunity to express your views and ensure your voice is heard
+              loud and clear!</h3>
+          </Alert>
+          <Authenticator
+            socialProviders={['amazon', 'apple', 'facebook', 'google']}
+            onStateChange={authState => {
+              if (authState === "signedIn") {
+                checkLoggedIn();
+              }
+            }}
+          />
 
-      
+        </Flex>
+        <View height="100vh" padding="20px">
+          <Notes />
+        </View>
+      </Grid>
+
+
     </>
   );
 };
