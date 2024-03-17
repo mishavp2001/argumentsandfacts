@@ -29,19 +29,22 @@ const App = ({ signOut }) => {
 
   const [state, setState] = useState({ isLoggedIn: false, user: null });
 
-  const checkLoggedIn = () => {
-    Auth.currentAuthenticatedUser()
-      .then(data => {
-        const user = { username: data.username, ...data.attributes };
-        setState({ isLoggedIn: true, user });
-      })
-      .catch(error => console.log(error));
+  const checkLoggedIn = async () => {
+    try {
+      const data = await Auth.currentAuthenticatedUser();
+      //const userGroup = user.attributes["custom:group"];
+      const user = { username: data.username, ...data.attributes };
+      setState({ isLoggedIn: true, user });
+     //console.log("USER GROUP", userGroup)
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     console.dir(state);
     checkLoggedIn();
-  });
+  }, []);
 
   const SignOutButton = styled(Button)`
   background-color: #74b49b;
