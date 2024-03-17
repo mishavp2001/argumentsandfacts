@@ -81,9 +81,9 @@ const App = ({ signOut }) => {
           <Authenticator
             socialProviders={['amazon', 'apple', 'facebook', 'google']}
             onStateChange={authState => {
-              if (authState === "signedIn") {
+              //if (authState === "signedIn") {
                 checkLoggedIn();
-              }
+              //}
             }}
           />  
         </Flex>
