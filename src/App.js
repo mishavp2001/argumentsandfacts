@@ -29,8 +29,6 @@ const App = ({ signOut }) => {
 
   const [state, setState] = useState({ isLoggedIn: false, user: null });
 
-
-
   const checkLoggedIn = () => {
     Auth.currentAuthenticatedUser()
       .then(data => {
@@ -41,8 +39,9 @@ const App = ({ signOut }) => {
   };
 
   useEffect(() => {
+    console.dir(state);
     checkLoggedIn();
-  }, [state.isLoggedIn]);
+  }, [state]);
 
   const SignOutButton = styled(Button)`
   background-color: #74b49b;
@@ -65,7 +64,6 @@ const App = ({ signOut }) => {
   ) : (
     <>
       <Grid templateColumns={{ base: "1fr 0", medium: "1fr 1fr" }}>
-
         <Flex
           direction='column'
           backgroundColor="hsl(185.69deg 19.2% 52.67%"
@@ -84,8 +82,7 @@ const App = ({ signOut }) => {
                 checkLoggedIn();
               }
             }}
-          />
-
+          />  
         </Flex>
         <View height="100vh" padding="20px">
           <Notes />
