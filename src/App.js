@@ -54,7 +54,7 @@ const App = () => {
           justifyContent="center"
         >
           <Alert style={{ backgroundColor: 'yellow', 'margin': '20px' }}>
-            <h3>This platform offers unrestricted freedom of speech to everyone, free of charge! You can sign up using your IP address and engage in discussions on any topic without fear of persecution. <br />
+            <h3>This platform offers unrestricted freedom of speech to everyone! You can sign up using your IP address and engage in discussions on any topic without fear of persecution. <br />
               We acknowledge that political parties and nations often manipulate news and facts to suit their agendas.
               Therefore, seize this opportunity to express your views and ensure your voice is heard
               loud and clear!</h3>
@@ -63,7 +63,7 @@ const App = () => {
             socialProviders={['amazon', 'apple', 'facebook', 'google']}
           />  
         </Flex>
-        <View height="100vh" padding="20px">
+        <View height="100vh" padding="20px" width="fit-content">
           <Notes />
         </View>
       </Grid>
