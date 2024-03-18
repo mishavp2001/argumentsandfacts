@@ -13,7 +13,7 @@ import {
   View
 
 } from "@aws-amplify/ui-react";
-import { Auth } from "aws-amplify";
+import { useAuthenticator } from '@aws-amplify/ui-react';
 import Notes from "./components/Notes"
 
 const Title = styled("h1")`
@@ -24,39 +24,20 @@ const Title = styled("h1")`
   font-size: 24px;
 `;
 
-const App = ({ signOut }) => {
-  const { tokens } = useTheme();
-
-  const [state, setState] = useState({ isLoggedIn: false, user: null });
-
-  const checkLoggedIn = async () => {
-    try {
-      const data = await Auth.currentAuthenticatedUser();
-      //const userGroup = user.attributes["custom:group"];
-      const user = { username: data.username, ...data.attributes };
-      setState({ isLoggedIn: true, user });
-     //console.log("USER GROUP", userGroup)
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    console.dir(state);
-    checkLoggedIn();
-  }, [state.isLoggedIn]);
-
-  const SignOutButton = styled(Button)`
-  background-color: #74b49b;
-  cursor: pointer;
+const SignOutButton = styled(Button)`
+background-color: #74b49b;
+cursor: pointer;
 `;
 
+const App = () => {
+  const { tokens } = useTheme();
+  const { user, signOut } = useAuthenticator((context) => [context.user]);
 
-  return state.isLoggedIn ? (
+  return user ? (
     <>
       <SignOutButton
         onClick={() => {
-          Auth.signOut().then(() => window.location.reload());
+          signOut().then(() => window.location.reload());
         }}
       >
         Sign Out
@@ -80,19 +61,12 @@ const App = ({ signOut }) => {
           </Alert>
           <Authenticator
             socialProviders={['amazon', 'apple', 'facebook', 'google']}
-            onStateChange={authState => {
-              //if (authState === "signedIn") {
-                checkLoggedIn();
-              //}
-            }}
           />  
         </Flex>
         <View height="100vh" padding="20px">
           <Notes />
         </View>
       </Grid>
-
-
     </>
   );
 };
