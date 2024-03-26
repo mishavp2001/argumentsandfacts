@@ -70,10 +70,11 @@ const ArticlesPage = () => {
     <Container fluid className='px-3'>
       <Row>
         <Col className='context-col'>
-            <View className="articles-list">
+            <View className="articles">
               <View>
                 {notes.map((note) => (
                   <Flex
+                    className="articles-list"
                     key={note.id || note.name}
                     direction="row"
                     justifyContent="left"

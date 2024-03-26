@@ -116,11 +116,16 @@ body {
     color: #61dafb;
   }
 
-
-  .articles-list {
+  .articles {
     background-color: #6a97eb;
     padding: 1em;
     color: black;
+  }
+
+  .articles-list {
+    padding: 1em;
+    background-color: white;
+    margin-bottom: 1em;
   }
 
 
