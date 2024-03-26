@@ -43,6 +43,10 @@ body {
       font-weight: 600;
     }
 
+    .navbar-nav .show>.nav-link {
+      color: rgb(89, 160, 182);
+    }
+
     .navbar-brand {
       font-size: 2em;
       font-weight: 700;
