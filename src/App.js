@@ -63,7 +63,7 @@ function App() {
       <NavigationBar signOut={signOut} loggedIn={loggedIn}/>
       <Container fluid className='my-5 app-body'>
                 <Row >
-                    <Col sm={12}>
+                    <Col sm={12} className='page-context'>
                       <Routes>
                       <Route path="/" element={<Layout />}>
                         <Route index path='/' exact={true} element = {<HomePage/>} />

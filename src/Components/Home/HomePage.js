@@ -8,7 +8,7 @@ function HomePage() {
 
     const AuthContext = useAuthenticator((context) => [context]);
         return (
-            <Container fluid className='px-1 context-container'>
+            <Container fluid className='px-1'>
                 <Row className='font-weight-light'>
                     <Col className='context-col'>
                     <Alert className='alert'>

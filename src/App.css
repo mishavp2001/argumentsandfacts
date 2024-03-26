@@ -13,6 +13,7 @@ body {
 .arguments-app {
 
   font-size: large;
+
   .side-bar .nav {
     display: block;
 
@@ -22,48 +23,52 @@ body {
 
     }
   }
-  
+
   .navbar {
     height: 6em;
     background-color: #046271 !important
   }
 
   .alert {
-     background-color: rgb(175, 144, 7);
-     color: white;
-     font-size: medium;
-     font-weight: 200;
-     margin: 20px 2px 2px 2px 
-    }
+    background-color: rgb(175, 144, 7);
+    color: white;
+    font-size: medium;
+    font-weight: 200;
+    margin: 20px 2px 2px 2px
+  }
+
   .navbar-dark {
     .navbar-nav .nav-link {
-    color: rgb(222 249 0);
-    font-weight: 600;
-   }
+      color: rgb(222 249 0);
+      font-weight: 600;
+    }
+
     .navbar-brand {
       font-size: 2em;
       font-weight: 700;
       color: rgb(255 255 255)
-     }
+    }
   }
-  
 
 
- .context-container {
-  margin-top: 5em;
-  margin-bottom: 5em;
-}
 
- .context-col {
-  background-color: rgb(48, 81, 97);
-  margin-left: 1em;
-  border-radius: 2em;
-  padding: 1em;
- }
- .side-bar-col {
-  background-color: #402659;
-  margin-left: 1em;
- }
+  .context-container, .page-context {
+    margin-top: 5em;
+    margin-bottom: 5em;
+  }
+
+  .context-col {
+    background-color: rgb(48, 81, 97);
+    margin-left: 1em;
+    border-radius: 2em;
+    padding: 1em;
+  }
+
+  .side-bar-col {
+    background-color: #402659;
+    margin-left: 1em;
+  }
+
   .app-body {
     background: #96adb6;
     color: white;
@@ -105,6 +110,21 @@ body {
 
   .App-link {
     color: #61dafb;
+  }
+
+
+  .articles-list {
+    background-color: #6a97eb;
+    padding: 1em;
+    color: black;
+  }
+
+
+  .article-publish {
+    background-color: #c9e3f6;
+    padding: 1em;
+    color: black;
+    font-weight: 400
   }
 
 

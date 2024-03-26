@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { Row, Col, Container } from 'react-bootstrap';
+import SideBar from '../Common/SideBar';
 import { API, Storage } from 'aws-amplify';
 import {
-    Button,
-    Flex,
-    Image,
-    Text,
-    TextField,
-    View,
-  } from "@aws-amplify/ui-react";
-  import { listNotes } from "../../graphql/queries";
-  import {
-    createNote as createNoteMutation,
-    deleteNote as deleteNoteMutation,
-  } from "../../graphql/mutations";
+  Button,
+  Flex,
+  Image,
+  Text,
+  TextField,
+  View,
+} from "@aws-amplify/ui-react";
+import { listNotes } from "../../graphql/queries";
+import {
+  createNote as createNoteMutation,
+  deleteNote as deleteNoteMutation,
+} from "../../graphql/mutations";
 
 const ArticlesPage = () => {
   const [notes, setNotes] = useState([]);
@@ -64,66 +66,71 @@ const ArticlesPage = () => {
   }, []);
 
   return (
-    <>
-      <h1>Articles</h1>
-      <View className="App">
-  <View margin="3rem 0" style={{}}>
-    {notes.map((note) => (
-      <Flex
-        key={note.id || note.name}
-        direction="row"
-        justifyContent="left"
-        alignItems="center"
-      >
-        <Text as="strong" fontWeight={700}>
-          {note.name}
-        </Text>
-        <Text as="span">{note.description}</Text>
-        {note.image && (
-          <Image
-            src={note.image}
-            alt={`visual aid for ${notes.name}`}
-            style={{ width: 400 }}
-          />
-        )}
-        <Button variation="link" onClick={() => deleteNote(note)}>
-          Delete Statment
-        </Button>
-      </Flex>
-    ))}
-  </View>
 
-        <div style={{}}>
-          <View as="form" margin="3rem 0" onSubmit={createNote}>
-            <Flex direction="column" justifyContent="left">
-              <TextField
-                name="name"
-                placeholder="Statment"
-                label="Statment"
-                labelHidden
-                variation="quiet"
-                required />
-              <TextField
-                name="description"
-                placeholder="Argemnet & Facts"
-                label="Argemnet"
-                labelHidden
-                variation="quiet"
-                required />
-              <View
-                name="image"
-                as="input"
-                type="file"
-                placeholder="Add Image"
-                style={{}} />
-              <Button type="submit" variation="primary">
-                Publish Statment
-              </Button>
-            </Flex>
-          </View>
-        </div>
-</View>
-    </>
+    <Container fluid className='px-3'>
+      <Row>
+        <Col className='context-col'>
+            <View className="articles-list">
+              <View>
+                {notes.map((note) => (
+                  <Flex
+                    key={note.id || note.name}
+                    direction="row"
+                    justifyContent="left"
+                    alignItems="center"
+                  >
+                    <Text as="strong" fontWeight={700}>
+                      {note.name}
+                    </Text>
+                    <Text as="span">{note.description}</Text>
+                    {note.image && (
+                      <Image
+                        src={note.image}
+                        alt={`visual aid for ${notes.name}`}
+                        style={{ width: 400 }}
+                      />
+                    )}
+                    <Button variation="link" onClick={() => deleteNote(note)}>
+                      Delete Statment
+                    </Button>
+                  </Flex>
+                ))}
+              </View>
+
+              <div className="article-publish">
+                <View as="form" margin="3rem 0" onSubmit={createNote}>
+                  <Flex direction="column" justifyContent="left">
+                    <span>Publish your article</span>    
+                    <TextField
+                      name="name"
+                      placeholder="Statment"
+                      label="Statment"
+                      labelHidden
+                      variation="quiet"
+                      required />
+                    <TextField
+                      name="description"
+                      placeholder="Argemnet & Facts"
+                      label="Argemnet"
+                      labelHidden
+                      variation="quiet"
+                      required />
+                    <View
+                      name="image"
+                      as="input"
+                      type="file"
+                      placeholder="Add Image"
+                      style={{}} />
+                    <Button type="submit" variation="primary">
+                      Publish Statment
+                    </Button>
+                  </Flex>
+                </View>
+              </div>
+            </View>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
