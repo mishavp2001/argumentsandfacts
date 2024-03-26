@@ -43,7 +43,7 @@ body {
     .navbar-brand {
       font-size: 2em;
       font-weight: 700;
-      color: rgb(8, 254, 29)
+      color: rgb(255 255 255)
      }
   }
   
@@ -57,9 +57,11 @@ body {
  .context-col {
   background-color: rgb(48, 81, 97);
   margin-left: 1em;
+  border-radius: 2em;
+  padding: 1em;
  }
  .side-bar-col {
-  background-color: black;
+  background-color: #402659;
   margin-left: 1em;
  }
   .app-body {
