@@ -1,7 +1,3 @@
-body {
-  background-color: #2964a3;
-}
-
 .App {
   text-align: left;
   background-color: rgb(255, 255, 255);
@@ -9,49 +5,115 @@ body {
   padding: 1em;
 }
 
-.auth-button {
-  padding: 2px;
-  width: 90px;
-  border-radius: 2em;
-  position: absolute;
+body {
+  background-color: black;
 }
 
-.App .amplify-button {
+
+.arguments-app {
+
+  font-size: large;
+  .side-bar .nav {
+    display: block;
+
+    .nav-link {
+      color: rgb(255, 255, 255);
+      font-weight: 600;
+
+    }
+  }
+  
+  .navbar {
+    height: 6em;
+    background-color: #046271 !important
+  }
+
+  .alert {
+     background-color: rgb(175, 144, 7);
+     color: white;
+     font-size: medium;
+     font-weight: 200;
+     margin: 20px 2px 2px 2px 
+    }
+  .navbar-dark {
+    .navbar-nav .nav-link {
+    color: rgb(222 249 0);
+    font-weight: 600;
+   }
+    .navbar-brand {
+      font-size: 2em;
+      font-weight: 700;
+      color: rgb(8, 254, 29)
+     }
+  }
+  
+
+
+ .context-container {
+  margin-top: 5em;
+  margin-bottom: 5em;
+}
+
+ .context-col {
+  background-color: rgb(48, 81, 97);
+  margin-left: 1em;
+ }
+ .side-bar-col {
+  background-color: black;
+  margin-left: 1em;
+ }
+  .app-body {
+    background: #96adb6;
+    color: white;
+  }
+
+  .auth-button {
+    padding: 2px;
+    width: 90px;
+    border-radius: 2em;
+    position: absolute;
+  }
+
+  .App .amplify-button {
     margin: 1em;
     float: right;
-}
+  }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
+    pointer-events: none;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
   }
-  to {
-    transform: rotate(360deg);
+
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
   }
+
+  .App-link {
+    color: #61dafb;
+  }
+
+
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
 }

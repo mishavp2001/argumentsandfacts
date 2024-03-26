@@ -8,13 +8,13 @@ import {
     TextField,
     View,
   } from "@aws-amplify/ui-react";
-  import { listNotes } from "../graphql/queries";
+  import { listNotes } from "../../graphql/queries";
   import {
     createNote as createNoteMutation,
     deleteNote as deleteNoteMutation,
-  } from "../graphql/mutations";
+  } from "../../graphql/mutations";
 
-const Notes = () => {
+const ArticlesPage = () => {
   const [notes, setNotes] = useState([]);
   async function fetchNotes() {
     const apiData = await API.graphql({ query: listNotes });
@@ -127,4 +127,4 @@ const Notes = () => {
   );
 };
 
-export default Notes;
+export default ArticlesPage;
