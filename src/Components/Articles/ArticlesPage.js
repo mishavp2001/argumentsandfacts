@@ -57,7 +57,7 @@ const ArticlesPage = () => {
     await Storage.remove(name);
     await API.graphql({
       query: deleteNoteMutation,
-      variables: { input: { id } },
+      variables: { input: { id }, _version: 1},
     });
   }
 
