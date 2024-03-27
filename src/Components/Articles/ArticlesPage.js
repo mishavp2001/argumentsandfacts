@@ -58,6 +58,7 @@ const ArticlesPage = () => {
     await API.graphql({
       query: createNoteMutation,
       variables: { input: data },
+      authMode: user?.username ? 'AMAZON_COGNITO_USER_POOLS' : 'AWS_IAM',
     });
     fetchNotes();
     event.target.reset();
@@ -70,6 +71,7 @@ const ArticlesPage = () => {
     await API.graphql({
       query: deleteNoteMutation,
       variables: { input: { id }},
+      authMode: user?.username ? 'AMAZON_COGNITO_USER_POOLS' : 'AWS_IAM'
     });
   }
 
