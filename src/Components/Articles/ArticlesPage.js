@@ -66,13 +66,17 @@ const ArticlesPage = () => {
 
   async function deleteNote({ id, name }) {
     const newNotes = notes.filter((note) => note.id !== id);
-    setNotes(newNotes);
-    await Storage.remove(name);
-    await API.graphql({
+    try{
+      await API.graphql({
       query: deleteNoteMutation,
       variables: { input: { id }},
       authMode: user?.username ? 'AMAZON_COGNITO_USER_POOLS' : 'AWS_IAM'
-    });
+      });
+      await Storage.remove(name);
+      setNotes(newNotes);
+    } catch {
+      alert("You don't have permission")
+    }
   }
 
   useEffect(() => {

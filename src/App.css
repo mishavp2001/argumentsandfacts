@@ -36,6 +36,7 @@ body {
     font-size: medium;
     font-weight: 400;
     margin: 20px 2px 2px;
+
     a {
       color: #050e5a;
       font-weight: 600;
@@ -62,7 +63,8 @@ body {
 
 
 
-  .context-container, .page-context {
+  .context-container,
+  .page-context {
     margin-top: 5em;
     margin-bottom: 5em;
   }
@@ -132,12 +134,18 @@ body {
     padding: 1em;
     background-color: white;
     margin-bottom: 1em;
+
     .f1 {
       flex: 0 20 350px;
     }
-    .f2, .f3, .f4, .f5 {
+
+    .f2,
+    .f3,
+    .f4,
+    .f5 {
       flex: 1;
     }
+
     .fs {
       flex: 0 0 250px;
     }
@@ -162,4 +170,13 @@ body {
     }
   }
 
+}
+
+#translate {
+  position: absolute;
+  top: 6px;
+  left: 40%;
+  width: 300px;
+  height: 2em;
+  z-index: 100000;
 }

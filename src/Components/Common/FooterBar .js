@@ -6,7 +6,7 @@ import { Container, Image, Col, Row } from 'react-bootstrap';
 const FooterBar = props => {
     return (
         <footer className="app-footer">
-            <Container fluid>
+            <Container fluid>        
                     <span className='text-end'>
                         &copy; 2023
                         <Image width='30px' src='/img/logo.png' fluid />
