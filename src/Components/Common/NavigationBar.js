@@ -1,13 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import '../../App.css'
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useAuthenticator, View } from '@aws-amplify/ui-react';
+import { useNavigate } from 'react-router-dom';
+import { useAuthenticator } from '@aws-amplify/ui-react';
 
 const NavigationBar = props => {
 

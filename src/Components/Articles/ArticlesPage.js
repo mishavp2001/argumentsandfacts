@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Container } from 'react-bootstrap';
-import SideBar from '../Common/SideBar';
+import {AmplifyS3Image} from "@aws-amplify/ui-react";
 import { API, Storage } from 'aws-amplify';
 import {
   Button,
@@ -10,6 +10,8 @@ import {
   TextField,
   View,
 } from "@aws-amplify/ui-react";
+import { useAuthenticator } from '@aws-amplify/ui-react';
+
 import { listNotes } from "../../graphql/queries";
 import {
   createNote as createNoteMutation,
@@ -18,6 +20,14 @@ import {
 
 const ArticlesPage = () => {
   const [notes, setNotes] = useState([]);
+
+  const { route, user, signOut } = useAuthenticator((context) => [
+    context.route,
+    context.signOut,
+]);
+
+console.log(user?.username);
+
   async function fetchNotes() {
     const apiData = await API.graphql({ query: listNotes });
     const notesFromAPI = apiData.data.listNotes.items;
@@ -40,7 +50,8 @@ const ArticlesPage = () => {
     const data = {
       name: form.get("name"),
       description: form.get("description"),
-      image: image.name,
+      image: image?.name,
+      user: user?.username
     };
     if (!!data.image) await Storage.put(data.name, image);
     await API.graphql({
@@ -57,7 +68,7 @@ const ArticlesPage = () => {
     await Storage.remove(name);
     await API.graphql({
       query: deleteNoteMutation,
-      variables: { input: { id }, _version: 1},
+      variables: { input: { id }},
     });
   }
 
@@ -91,9 +102,12 @@ const ArticlesPage = () => {
                         style={{ width: 400 }}
                       />
                     )}
-                    <Button variation="link" onClick={() => deleteNote(note)}>
-                      Delete Statment
+
+                    {route === 'authenticated' && (
+                      <Button variation="link" onClick={() => deleteNote(note)}>
+                      Delete
                     </Button>
+                    )}
                   </Flex>
                 ))}
               </View>
