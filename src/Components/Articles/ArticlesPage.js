@@ -100,10 +100,10 @@ const ArticlesPage = () => {
                     <Text className="f2" as="span">{note.description}</Text>
                     {note.image && (
                       <Image
-                        className="f3"
+                        className="fs"
                         src={note.image}
                         alt={`visual aid for ${notes.name}`}
-                        style={{ width: 400 }}
+                        style={{ width: 200 }}
                       />
                     )}
 

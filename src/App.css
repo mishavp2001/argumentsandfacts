@@ -133,10 +133,13 @@ body {
     background-color: white;
     margin-bottom: 1em;
     .f1 {
-      flex: 0 20 150px;
+      flex: 0 20 350px;
     }
     .f2, .f3, .f4, .f5 {
       flex: 1;
+    }
+    .fs {
+      flex: 0 0 250px;
     }
   }
 
