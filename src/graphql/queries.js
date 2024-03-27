@@ -8,8 +8,10 @@ export const getNote = /* GraphQL */ `
       name
       description
       image
+      user
       createdAt
       updatedAt
+      owner
       __typename
     }
   }
@@ -26,8 +28,10 @@ export const listNotes = /* GraphQL */ `
         name
         description
         image
+        user
         createdAt
         updatedAt
+        owner
         __typename
       }
       nextToken

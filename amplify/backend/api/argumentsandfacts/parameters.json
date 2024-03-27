@@ -1,8 +1,9 @@
 {
   "AppSyncApiName": "argumentsandfacts",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "CreateAPIKey": 1,
   "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2024-03-27T18:14:42.168Z",
+  "AuthModeLastUpdated": "2024-03-27T21:12:05.167Z",
   "AuthCognitoUserPoolId": {
     "Fn::GetAtt": [
       "authargumentsandfacts14a21475",

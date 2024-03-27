@@ -4,22 +4,19 @@
     "apiName": "argumentsandfacts",
     "serviceName": "AppSync",
     "defaultAuthType": {
-      "mode": "AMAZON_COGNITO_USER_POOLS",
-      "cognitoUserPoolId": "authargumentsandfacts14a21475"
+      "mode": "API_KEY",
+      "expirationTime": 360,
+      "apiKeyExpirationDate": "2025-03-22T21:11:46.645Z",
+      "keyDescription": "args"
     },
-    "conflictResolution": {
-      "defaultResolutionStrategy": {
-        "type": "NONE"
-      }
-    },
+    "conflictResolution": {},
     "additionalAuthTypes": [
       {
-        "mode": "AWS_IAM"
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authargumentsandfacts14a21475"
       },
       {
-        "mode": "API_KEY",
-        "keyDescription": "api key description",
-        "expirationTime": 30
+        "mode": "AWS_IAM"
       }
     ]
   }
