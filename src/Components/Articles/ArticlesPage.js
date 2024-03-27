@@ -94,12 +94,13 @@ const ArticlesPage = () => {
                     justifyContent="left"
                     alignItems="center"
                   >
-                    <Text as="strong" fontWeight={700}>
+                    <Text as="strong" className="f1" fontWeight={700}>
                       {note.name}
                     </Text>
-                    <Text as="span">{note.description}</Text>
+                    <Text className="f2" as="span">{note.description}</Text>
                     {note.image && (
                       <Image
+                        className="f3"
                         src={note.image}
                         alt={`visual aid for ${notes.name}`}
                         style={{ width: 400 }}
