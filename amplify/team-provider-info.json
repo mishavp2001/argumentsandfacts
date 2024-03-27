@@ -10,6 +10,17 @@
       "StackName": "amplify-argumentsandfacts-main-221710",
       "StackId": "arn:aws:cloudformation:us-east-1:696170982176:stack/amplify-argumentsandfacts-main-221710/1cb71580-db3e-11ee-bdaa-0e1c1f7f45d3",
       "AmplifyAppId": "d3p0hrbxmyp6ig"
+    },
+    "categories": {
+      "auth": {
+        "argumentsandfacts14a21475": {}
+      },
+      "storage": {
+        "imagestorage": {}
+      },
+      "api": {
+        "argumentsandfacts": {}
+      }
     }
   }
 }

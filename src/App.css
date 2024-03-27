@@ -30,11 +30,12 @@ body {
   }
 
   .alert {
-    background-color: rgb(175, 144, 7);
-    color: white;
+    background-color: #faa41c;
+    border-radius: 1em;
+    color: #060226;
     font-size: medium;
     font-weight: 200;
-    margin: 20px 2px 2px 2px
+    margin: 20px 2px 2px;
   }
 
   .navbar-dark {
