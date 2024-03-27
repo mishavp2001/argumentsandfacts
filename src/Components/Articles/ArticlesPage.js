@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Container } from 'react-bootstrap';
-import {AmplifyS3Image} from "@aws-amplify/ui-react";
+import { useNavigate } from "react-router-dom";
 import { API, Storage } from 'aws-amplify';
 import {
   Button,
@@ -20,13 +20,14 @@ import {
 
 const ArticlesPage = () => {
   const [notes, setNotes] = useState([]);
+  const navigate = useNavigate();
 
   const { route, user, signOut } = useAuthenticator((context) => [
     context.route,
     context.signOut,
 ]);
 
-console.log(user?.username);
+//console.log(user?.username);
 
   async function fetchNotes() {
     const apiData = await API.graphql({ query: listNotes });
@@ -112,7 +113,8 @@ console.log(user?.username);
                 ))}
               </View>
 
-              <div className="article-publish">
+              {user?.username &&
+                <div className="article-publish">
                 <View as="form" margin="3rem 0" onSubmit={createNote}>
                   <Flex direction="column" justifyContent="left">
                     <span>Publish your article</span>    
@@ -137,11 +139,11 @@ console.log(user?.username);
                       placeholder="Add Image"
                       style={{}} />
                     <Button type="submit" variation="primary">
-                      Publish Statment
+                      Publish
                     </Button>
                   </Flex>
                 </View>
-              </div>
+              </div>}
             </View>
         </Col>
       </Row>

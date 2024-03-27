@@ -30,12 +30,17 @@ body {
   }
 
   .alert {
-    background-color: #faa41c;
+    background-color: #f8dfb8;
     border-radius: 1em;
     color: #060226;
     font-size: medium;
-    font-weight: 200;
+    font-weight: 400;
     margin: 20px 2px 2px;
+    a {
+      color: #050e5a;
+      font-weight: 600;
+      cursor: pointer;
+    }
   }
 
   .navbar-dark {

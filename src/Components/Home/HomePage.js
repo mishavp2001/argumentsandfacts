@@ -5,17 +5,19 @@ import ArticlesPage from '../Articles/ArticlesPage'
 import { useAuthenticator, Alert } from '@aws-amplify/ui-react';
 
 function HomePage() {
-
-    const AuthContext = useAuthenticator((context) => [context]);
+    const { route, user } = useAuthenticator((context) => [
+        context.route,
+    ]);
         return (
             <Container fluid className='px-1'>
                 <Row className='font-weight-light'>
                     <Col className='context-col'>
                     <Alert className='alert'>
-                        This platform offers unrestricted freedom of speech to everyone! You can sign up using your IP address and engage in discussions on any topic without fear of persecution. <br />
+                        Welcome{user?.username? user?.username && '!' : '!'}<br/>
+                        This platform offers unrestricted freedom of speech to everyone! You can sign up using your IP address and engage in discussions on any topic without fear of persecution.
                         We acknowledge that political parties and nations often manipulate news and facts to suit their agendas.
                         Therefore, seize this opportunity to express your views and ensure your voice is heard
-                        loud and clear!
+                        loud and clear! {!user && <a href='/login'>Create your account to express your thoughts!</a>}
                     </Alert>
                         <ArticlesPage />
                      </Col>   
