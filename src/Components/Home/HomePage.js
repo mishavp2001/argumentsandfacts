@@ -8,12 +8,13 @@ function HomePage() {
     const { route, user } = useAuthenticator((context) => [
         context.route,
     ]);
+    console.log(user?.username);
         return (
             <Container fluid className='px-1'>
                 <Row className='font-weight-light'>
                     <Col className='context-col'>
                     <Alert className='alert'>
-                        Welcome{user?.username? user?.username && '!' : '!'}<br/>
+                        Welcome{user ? ` ${user?.username}!` : '!'}<br/>
                         This platform offers unrestricted freedom of speech to everyone! You can sign up using your IP address and engage in discussions on any topic without fear of persecution.
                         We acknowledge that political parties and nations often manipulate news and facts to suit their agendas.
                         Therefore, seize this opportunity to express your views and ensure your voice is heard

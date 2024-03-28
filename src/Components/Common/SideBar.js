@@ -9,13 +9,13 @@ const SideBar = props => {
         <Row>
         <Col>
         <Nav>
-            <h4>Popular Debates</h4>
+            <h4>Popular</h4>
             <Nav.Link href='/politics'>Politics</Nav.Link>
             <Nav.Link href='/sports'>Sports</Nav.Link>
             <Nav.Link href='/religion'>Religion</Nav.Link>
             <Nav.Link href='/health'>Health</Nav.Link>
             <Divider />
-            <h4>Latest Debates</h4>
+            <h4>Latest</h4>
             <Divider />
             <Nav.Link href='/sports'>Sports</Nav.Link>
         </Nav>

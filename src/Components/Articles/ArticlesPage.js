@@ -120,7 +120,6 @@ const ArticlesPage = () => {
                         className="fs"
                         src={note.image}
                         alt={`visual aid for ${notes.name}`}
-                        style={{ width: 200 }}
                       />
                     )}
 

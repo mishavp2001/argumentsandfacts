@@ -21,7 +21,7 @@ const AboutPage = () => {
     <Container fluid className='px-3'>
       <Row>
         <Col className='context-col'>
-          <Message style={{ backgroundColor: '#ba8686', margin: '2em' }}>
+          <Message style={{ backgroundColor: '#ba8686', margin: '2em',  'border-radius': '1em' }}>
             <h2>Conflicts</h2>
             <span>
               A conflict arises when two or more parties hold contrasting opinions or perspectives regarding evident facts, leading to disagreements, clashes, or struggles.
@@ -42,7 +42,7 @@ const AboutPage = () => {
           </Flex>
           <Divider />
 
-          <Message style={{ backgroundColor: 'lightgreen', margin: '2em' }}>
+          <Message style={{ backgroundColor: '#cbe2f8', margin: '2em' }}>
             <h2>
               Our goal is to provide a platform to aid conflicting parties in finding resolution by assessing arguments, establishing mutually agreeable facts, and determining the best possible solution. </h2>
             <ol>

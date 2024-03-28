@@ -1,9 +1,3 @@
-.App {
-  text-align: left;
-  background-color: rgb(255, 255, 255);
-  margin: 1em;
-  padding: 1em;
-}
 
 body {
   background-color: black;
@@ -11,9 +5,6 @@ body {
 
 
 .arguments-app {
-
-  font-size: large;
-
   .side-bar .nav {
     display: block;
 
@@ -46,16 +37,36 @@ body {
 
   .navbar-dark {
     .navbar-nav .nav-link {
-      color: rgb(222 249 0);
+      color: rgb(253, 253, 255);
       font-weight: 600;
     }
 
-    .navbar-nav .show>.nav-link {
-      color: rgb(89, 160, 182);
+    .navbar-nav.show>.nav-link {
+      color: rgb(248, 251, 251);
+    }
+
+    @media (min-width: 1199px) {
+      .dropdown-menu.show {
+        background-color: #25414f;
+        padding-left: 2em;
+      }
+    }
+
+
+    @media (max-width: 1199px) {
+      .navbar-collapse.collapse {
+        background-color: #25414f;
+        padding-left: 2em;
+
+        .dropdown-menu.show {
+          background-color: #25414f;
+          padding-left: 2em;
+        }
+      }
     }
 
     .navbar-brand {
-      font-size: 2em;
+      font-size: 2.2em;
       font-weight: 700;
       color: rgb(255 255 255)
     }
@@ -73,10 +84,22 @@ body {
     background-color: rgb(48, 81, 97);
     border-radius: 2em;
     padding: 1em;
+
+    @media (max-width: 767px) {
+      .articles-list {
+        flex-direction: column !important;
+      }
+
+      .fs {
+        flex: 0 0 50px;
+        width: 100px;
+      }
+    }
+
   }
 
   .side-bar-col {
-    background-color: #402659;
+    background-color: #063f49;
     margin-left: 1em;
   }
 
@@ -135,7 +158,7 @@ body {
     margin-bottom: 1em;
 
     .f1 {
-      flex: 0 20 350px;
+      flex: 0 20 100px;
     }
 
     .f2,
@@ -146,7 +169,8 @@ body {
     }
 
     .fs {
-      flex: 0 0 250px;
+      flex: 0 0 100px;
+      width: 150px;
     }
   }
 
@@ -168,7 +192,27 @@ body {
       transform: rotate(360deg);
     }
   }
+
+  .nav-link.selected {
+    background-color: rgb(15, 46, 130);
+    border: 1px solid aliceblue;
+    text-align: center;
+  }
+
+  .brand {
+    background-color: #063f49;
+    padding: 0 1em;
+    text-align: center;
+  }
+
+  .brand.selected {
+    border: 1px solid aliceblue;
+  }
+
 }
+
+
+
 #google_translate_element {
   width: 300px;
   height: 2em;

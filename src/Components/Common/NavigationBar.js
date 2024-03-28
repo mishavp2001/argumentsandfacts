@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useResolvedPath } from 'react-router-dom';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 
 const NavigationBar = props => {
@@ -14,25 +14,27 @@ const NavigationBar = props => {
         context.signOut,
     ]);
     const navigate = useNavigate();
+    const path = useResolvedPath();
 
     function handleLogOut() {
         signOut();
         //navigate('/login');
     }
 
+console.dir( path.pathname);
 
     return (
         <header>
             <Navbar variant="dark" expand="lg" bg='info' fixed='top'>
-                <Navbar.Brand className="brand" href="/">
+                <Navbar.Brand className={`brand ${path.pathname === "/" ? "selected" : ""}`} href="/">
                     Arguments&Facts
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href='/articles'>Articles</Nav.Link>
-                        <Nav.Link href='/debates'>Debates</Nav.Link>
-                        <Nav.Link href='/about'>About</Nav.Link>
+                        <Nav.Link href='/articles' className={path.pathname === "/articles" ? "selected" : ""}>Articles</Nav.Link>
+                        <Nav.Link href='/debates' className={path.pathname === "/debates" ? "selected" : ""}>Debates</Nav.Link>
+                        <Nav.Link href='/about' className={path.pathname === "/about" ? "selected" : ""}>About</Nav.Link>
                     </Nav>
 
                     <Form className='d-flex'>
