@@ -9,6 +9,7 @@ import {
   Text,
   TextField,
   View,
+  Alert
 } from "@aws-amplify/ui-react";
 import { useAuthenticator } from '@aws-amplify/ui-react';
 
@@ -20,6 +21,8 @@ import {
 
 const ArticlesPage = () => {
   const [notes, setNotes] = useState([]);
+  const [alertActive, setAlertActive] = useState(false);
+
   const navigate = useNavigate();
 
   const { route, user, signOut } = useAuthenticator((context) => [
@@ -41,6 +44,7 @@ const ArticlesPage = () => {
         return note;
       })
     );
+    setAlertActive(false);
     setNotes(notesFromAPI);
   }
 
@@ -75,7 +79,7 @@ const ArticlesPage = () => {
       await Storage.remove(name);
       setNotes(newNotes);
     } catch {
-      alert("You don't have permission")
+      setAlertActive(true); 
     }
   }
 
@@ -86,6 +90,15 @@ const ArticlesPage = () => {
   return (
 
     <Container fluid className='px-3'>
+      {alertActive && (
+        <Alert 
+          colorTheme="warning" 
+          isDismissible={true}
+          onDismiss={() => setAlertActive(false)}  
+        >
+              You don't have permission
+          </Alert>)
+        }
       <Row>
         <Col className='context-col'>
             <View className="articles">

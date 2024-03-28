@@ -32,6 +32,7 @@ const NavigationBar = props => {
                     <Nav className="mr-auto">
                         <Nav.Link href='/articles'>Articles</Nav.Link>
                         <Nav.Link href='/debates'>Debates</Nav.Link>
+                        <Nav.Link href='/about'>About</Nav.Link>
                     </Nav>
 
                     <Form className='d-flex'>

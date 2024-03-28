@@ -20,6 +20,8 @@ import awsExports from './aws-exports';
 import './App.css';
 import '@aws-amplify/ui-react/styles.css';
 import ArticlesPage from './Components/Articles/ArticlesPage';
+import AboutPage from './Components/About/AboutPage';
+
 import { RequireAuth } from './Components/Auth/RequireAuth';
 import { Layout } from './Components/Common/Layout';
 
@@ -75,6 +77,7 @@ function App() {
                         <Route path='/religion' element = {<RequireAuth><DebatesPage /></RequireAuth>} />
                         <Route path='/health' element = {<RequireAuth><DebatesPage /></RequireAuth>} />
                         <Route path='/debates' element = {<RequireAuth><DebatesPage /></RequireAuth>} />
+                        <Route path='/about' element = {<AboutPage />}></Route>
                       </Route>  
                   </Routes>
                   </Col>
