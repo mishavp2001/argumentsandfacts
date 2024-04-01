@@ -95,8 +95,10 @@ const ArticlesPage = () => {
           "Content-type": "application/json;"
         }
       });
-      console.dir(resp);
-      alert(resp.json());
+      const body = await response.body;
+      const reader = body.getReader();
+      console.dir(reader);
+      alert(reader.json());
     } catch {
       setAlertActive(true);
     }
