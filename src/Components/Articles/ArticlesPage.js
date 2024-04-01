@@ -90,7 +90,10 @@ const ArticlesPage = () => {
         method: "POST",
         body: JSON.stringify({
           data: 'Debate:' +  note.name }
-        )
+        ),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
       });
       alert(resp);
     } catch {
