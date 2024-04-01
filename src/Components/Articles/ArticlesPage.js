@@ -98,7 +98,8 @@ const ArticlesPage = () => {
       const body = await resp.body;
       const reader = body.getReader();
       console.dir(reader);
-      alert(reader.json());
+      const txt = await reader.read();
+      alert(txt);
     } catch {
       setAlertActive(true);
     }
