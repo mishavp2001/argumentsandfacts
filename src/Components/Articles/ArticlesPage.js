@@ -95,7 +95,8 @@ const ArticlesPage = () => {
           "Content-type": "application/json; charset=UTF-8"
         }
       });
-      alert(resp);
+      console.dir(resp);
+      alert(JSON.stringify(resp));
     } catch {
       setAlertActive(true);
     }
