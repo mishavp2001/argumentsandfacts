@@ -90,12 +90,7 @@ const ArticlesPage = () => {
         method: "POST",
         body: JSON.stringify({
           data: 'Debate:' +  note.name }
-        ),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          "Access-Control-Allow-Origin": "*", // Required for CORS support to work
-          "Access-Control-Allow-Credentials": true, // Required for cookies, authorization headers with HTTPS    
-        }
+        )
       });
       alert(resp);
     } catch {
