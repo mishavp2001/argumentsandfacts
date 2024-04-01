@@ -99,7 +99,7 @@ const ArticlesPage = () => {
       const reader = body.getReader();
       console.dir(reader);
       const txt = await reader.read();
-      alert(txt);
+      alert(new TextDecoder().decode(txt.value));
     } catch {
       setAlertActive(true);
     }
