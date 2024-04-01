@@ -92,11 +92,11 @@ const ArticlesPage = () => {
           data: 'Debate:' +  note.name }
         ),
         headers: {
-          "Content-type": "application/json; charset=UTF-8"
+          "Content-type": "application/json;"
         }
       });
       console.dir(resp);
-      alert(JSON.stringify(resp));
+      alert(resp.json());
     } catch {
       setAlertActive(true);
     }
