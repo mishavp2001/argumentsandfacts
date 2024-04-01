@@ -95,7 +95,7 @@ const ArticlesPage = () => {
           "Content-type": "application/json;"
         }
       });
-      const body = await response.body;
+      const body = await resp.body;
       const reader = body.getReader();
       console.dir(reader);
       alert(reader.json());
