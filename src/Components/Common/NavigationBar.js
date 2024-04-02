@@ -9,9 +9,11 @@ import { useAuthenticator } from '@aws-amplify/ui-react';
 
 const NavigationBar = props => {
 
-    const { route, user, signOut } = useAuthenticator((context) => [
+    const { route, user, authStatus, signOut } = useAuthenticator((context) => [
         context.route,
-        context.signOut,
+        context.user,
+        context.authStatus,
+        context.signOut
     ]);
     const navigate = useNavigate();
     const path = useResolvedPath();
@@ -21,7 +23,7 @@ const NavigationBar = props => {
         //navigate('/login');
     }
 
-console.dir( path.pathname);
+console.dir( path.pathname, route);
 
     return (
         <header>
@@ -42,7 +44,7 @@ console.dir( path.pathname);
                         <Button variant="secondary">Search</Button>
                     </Form>
                     <Nav className='ms-md-auto login-nav'>
-                        {route === 'authenticated' ?
+                        {authStatus === 'authenticated' ?
                             <NavDropdown title={user.username} id="email">
                                 <Nav.Link href="/profile">Profile</Nav.Link>
                                 <Nav.Link onClick={handleLogOut}>Logout</Nav.Link>
