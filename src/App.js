@@ -13,7 +13,13 @@ import DebatesPage from './Components/Home/DebatesPage';
 import { Route, Routes } from 'react-router-dom';
 import { Row, Col, Container, Image, Button, Nav } from 'react-bootstrap';
 
-import { Amplify, AuthModeStrategyType, Auth, Storage } from 'aws-amplify';
+import { Amplify } from 'aws-amplify';
+import {
+  fetchAuthSession,
+  getCurrentUser
+} from 'aws-amplify/auth';
+
+import { AuthModeStrategyType } from 'aws-amplify/datastore';
 import { Authenticator, useTheme, Text  } from '@aws-amplify/ui-react';
 import awsExports from './aws-exports';
 
@@ -25,6 +31,23 @@ import AboutPage from './Components/About/AboutPage';
 import { RequireAuth } from './Components/Auth/RequireAuth';
 import { Layout } from './Components/Common/Layout';
 
+const getAuthenticatedUser = async () => {
+  const {
+    username,
+    signInDetails
+  } = await getCurrentUser();
+
+  const {
+    tokens: session
+  } = await fetchAuthSession();
+
+  // Note that session will no longer contain refreshToken and clockDrift
+  return {
+    username,
+    session,
+    authenticationFlowType: signInDetails.authFlowType
+  };
+}
 Amplify.configure({
   ...awsExports,
   DataStore: {
@@ -36,7 +59,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const assessLoggedInState = () => {
-      Auth.currentAuthenticatedUser()
+    getAuthenticatedUser()
           .then(sess => {
               console.log('logged in');
               setLoggedIn(true);
@@ -52,7 +75,7 @@ function App() {
 
   const signOut = async () => {
       try {
-          await Auth.signOut();
+          await Amplify.Auth.signOut();
           setLoggedIn(false);
       } catch (error) {
           console.log('error signing out: ', error);

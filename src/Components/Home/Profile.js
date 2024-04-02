@@ -9,7 +9,7 @@ function Profile(props) {
         <Container fluid className='px-5 my-5 generic-container'>
             <Row style={{ 'marginTop': '6rem' }}>
                 <Col>
-                    Welcome {user?.attributes?.email}
+                    Welcome {user?.username}
                 </Col>
             </Row>
         </Container>

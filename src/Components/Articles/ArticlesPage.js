@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Container } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
-import { API, Storage } from 'aws-amplify';
+import { Accordion } from '@aws-amplify/ui-react';
 import {
   Button,
   Flex,
@@ -9,15 +9,18 @@ import {
   Text,
   TextField,
   View,
-  Alert
+  Alert,
 } from "@aws-amplify/ui-react";
 import { useAuthenticator } from '@aws-amplify/ui-react';
-
+import { generateClient } from 'aws-amplify/api';
 import { listNotes } from "../../graphql/queries";
 import {
   createNote as createNoteMutation,
   deleteNote as deleteNoteMutation,
 } from "../../graphql/mutations";
+import { uploadData, getUrl, remove } from 'aws-amplify/storage';
+
+
 
 const ArticlesPage = () => {
   const [notes, setNotes] = useState([]);
@@ -30,35 +33,37 @@ const ArticlesPage = () => {
     context.signOut,
   ]);
 
+  const client = generateClient();
+
   //console.log(user?.username);
   async function fetchAi() {
     const notesCopy = [...notes];
     await Promise.all(
       notesCopy.map(async (note, index) => {
-          note.args = await aiNote(note, 'list supporting arguments');
-          note.facts = await aiNote(note, 'list facts'); 
+        note.args = await aiNote(note, 'list supporting arguments');
+        note.facts = await aiNote(note, 'list facts');
         return notesCopy;
       })
-    )  
-    setNotes(notesCopy);    
+    )
+    setNotes(notesCopy);
   }
 
 
   async function fetchNotes() {
-    const apiData = await API.graphql({ query: listNotes });
+    const apiData = await client.graphql({ query: listNotes });
     const notesFromAPI = apiData.data.listNotes.items;
     await Promise.all(
       notesFromAPI.map(async (note, index) => {
         if (note.image) {
-          const url = await Storage.get(note.name);
-          note.image = url;
+          const url = await getUrl({ key: note.name });
+          note.image = url.url;
         }
         note.close = true;
         return note;
       })
     );
     setAlertActive(false);
-    setNotes(notesFromAPI);    
+    setNotes(notesFromAPI);
   }
 
   async function createNote(event) {
@@ -71,8 +76,8 @@ const ArticlesPage = () => {
       image: image?.name,
       user: user?.username
     };
-    if (!!data.image) await Storage.put(data.name, image);
-    await API.graphql({
+    if (!!data.image) await uploadData(data.name, image);
+    await client.graphql({
       query: createNoteMutation,
       variables: { input: data },
       authMode: user?.username ? 'AMAZON_COGNITO_USER_POOLS' : 'AWS_IAM',
@@ -84,12 +89,12 @@ const ArticlesPage = () => {
   async function deleteNote({ id, name }) {
     const newNotes = notes.filter((note) => note.id !== id);
     try {
-      await API.graphql({
+      await client.graphql({
         query: deleteNoteMutation,
         variables: { input: { id } },
         authMode: user?.username ? 'AMAZON_COGNITO_USER_POOLS' : 'AWS_IAM'
       });
-      await Storage.remove(name);
+      await remove(name);
       setNotes(newNotes);
     } catch {
       setAlertActive(true);
@@ -97,10 +102,10 @@ const ArticlesPage = () => {
   }
 
   async function refreshNote(note) {
-    notes.map(async (nt)=>{
+    notes.map(async (nt) => {
       if (note.id === nt.id) {
         nt.args = await aiNote(note, 'list supporting arguments');
-        nt.facts = await aiNote(note, 'list facts'); 
+        nt.facts = await aiNote(note, 'list facts');
       }
       return nt;
     })
@@ -154,66 +159,79 @@ const ArticlesPage = () => {
         <Col className='context-col'>
           <View className="articles">
             <View>
-              {notes.map((note) => {
-
+              {notes.map((note, index) => {
                 return (
-                <>
-                  <Flex
-                    className="articles-list"
-                    key={note.id || note.name}
-                    direction="row"
-                    justifyContent="left"
-                    alignItems="center"
-                  >
-                    <Text as="strong" className="f1" fontWeight={700}>
-                      {note.name}
-                    </Text>
-                    <Text className="f2" as="span">{note.description}</Text>
-                    {note.image && (
-                      <Image
-                        className="fs"
-                        src={note.image}
-                        alt={`visual aid for ${notes.name}`}
-                      />
-                    )}
+                  <div key={`notes-${note.name}`}>
+                    <Accordion.Container className="accordion-articles" defaultValue={['item-0']}>
+                      <Accordion.Item value={`item-${index}`}>
+                        <Accordion.Trigger>
+                          <Text as="strong" fontWeight={700}>
+                            {note.name}
+                          </Text>
+                          <Accordion.Icon />
+                        </Accordion.Trigger>
+                        <Accordion.Content>
+                          <Flex
+                            className="articles-list"
+                            key={note.id || note.name}
+                            direction="row"
+                            justifyContent="left"
+                            alignItems="center"
+                          >
+                            <div className="f1" >
+                              <Text className="f2" as="span">{note.description}</Text>
+                            </div>
 
-                    {route === 'authenticated' && (
-                      <div style={{ 'display': 'table-column', textAlign: 'left' }}>
-                        <div>
-                          <Button title="Update article" variation="link" onClick={() => deleteNote(note)}>
-                            Edit
-                          </Button>
-                        </div>
-                        <div>
-                          <Button title="Delete article" variation="link" onClick={() => deleteNote(note)}>
-                            Delete
-                          </Button>
-                        </div>
+                            {note.image && (
+                              <Image
+                                className="fs"
+                                src={note.image}
+                                alt={`visual aid for ${notes.name}`}
+                              />
+                            )}
 
-                      </div>
-                    )}
-                  </Flex>
-                  <Flex
-                    className="arguments-list"
-                    key={`args-${notes.name}`}
-                    direction="row"
-                    justifyContent="left"
-                    alignItems="center"
-                  >
-                    <div className='args-close'>
-                      <Text className="f2" as="strong">
-                          {note.args }
-                      </Text>
-                      <Text className="f2" as="span">
-                          { note.facts}
-                      </Text>
-                    </div>
-                      <Button title="A&F fetches arguments and facts" variation="link" onClick={(e) => {if(!note.facts) {refreshNote(note)}; e.target.parentNode.firstChild.classList.remove('args-close')}}>
-                        {!note.facts && 'A&F Bot thoughts are here'}
-                      </Button>
-                  </Flex>
-                </>
-              )})}
+                            {route === 'authenticated' && (
+                              <div style={{ 'display': 'table-column', textAlign: 'left' }}>
+                                <div>
+                                  <Button title="Update article" variation="link" onClick={() => deleteNote(note)}>
+                                    Edit
+                                  </Button>
+                                </div>
+                                <div>
+                                  <Button title="Delete article" variation="link" onClick={() => deleteNote(note)}>
+                                    Delete
+                                  </Button>
+                                </div>
+
+                              </div>
+                            )}
+                          </Flex>
+                          <Flex
+                            className="arguments-list"
+                            key={`args-${notes.name}`}
+                            direction="row"
+                            justifyContent="left"
+                            alignItems="center"
+                          >
+                            <Button title="A&F fetches arguments and facts" variation="link" onClick={(e) => { if (!note.facts) { refreshNote(note) }; e.target.parentNode.children[1].classList.remove('args-close') }}>
+                              {!note.facts ? 'A&F Bot is fetching information ...' : 'A&F Bot says'}
+                            </Button>
+                            <div className='args-close'>
+                              <Text className="f2" as="strong">
+                                {note.args}
+                              </Text>
+                              <Text className="f2" as="span">
+                                {note.facts}
+                              </Text>
+                            </div>
+
+                          </Flex>
+                        </Accordion.Content>
+                      </Accordion.Item>
+                    </Accordion.Container>
+                  </div>
+                )
+              })}
             </View>
 
             {user?.username &&

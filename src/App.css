@@ -158,22 +158,34 @@ body {
   .args-close{
     display: none; 
   }
+  .accordion-articles {
+    background-color: rgb(193 193 193);
+ 
+
+    .amplify-accordion__item__trigger .amplify-text {
+      font-size: x-large;
+    }
+  }
+  
+  .amplify-accordion__item__body {
+    color: var(--amplify-colors-white);
+  }
 
   .articles-list,  .arguments-list 
     {
     padding: 1em;
     background-color: white;
-    margin-bottom: 1em;
+    border: 2px solid rgb(48, 86, 213);
 
     .f1 {
-      flex: 0 20 100px;
+      flex: 1 0 120px;
     }
 
     .f2,
     .f3,
     .f4,
     .f5 {
-      flex: 1;
+      flex: 1 0 300px;
     }
 
     .fs {

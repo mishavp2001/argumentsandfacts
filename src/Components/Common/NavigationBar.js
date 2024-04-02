@@ -43,7 +43,7 @@ console.dir( path.pathname);
                     </Form>
                     <Nav className='ms-md-auto login-nav'>
                         {route === 'authenticated' ?
-                            <NavDropdown title={user.attributes.email} id="email">
+                            <NavDropdown title={user.username} id="email">
                                 <Nav.Link href="/profile">Profile</Nav.Link>
                                 <Nav.Link onClick={handleLogOut}>Logout</Nav.Link>
                             </NavDropdown> :
