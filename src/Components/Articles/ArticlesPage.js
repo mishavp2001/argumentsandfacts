@@ -31,21 +31,34 @@ const ArticlesPage = () => {
   ]);
 
   //console.log(user?.username);
+  async function fetchAi() {
+    const notesCopy = [...notes];
+    await Promise.all(
+      notesCopy.map(async (note, index) => {
+          note.args = await aiNote(note, 'list supporting arguments');
+          note.facts = await aiNote(note, 'list facts'); 
+        return notesCopy;
+      })
+    )  
+    setNotes(notesCopy);    
+  }
+
 
   async function fetchNotes() {
     const apiData = await API.graphql({ query: listNotes });
     const notesFromAPI = apiData.data.listNotes.items;
     await Promise.all(
-      notesFromAPI.map(async (note) => {
+      notesFromAPI.map(async (note, index) => {
         if (note.image) {
           const url = await Storage.get(note.name);
           note.image = url;
         }
+        note.close = true;
         return note;
       })
     );
     setAlertActive(false);
-    setNotes(notesFromAPI);
+    setNotes(notesFromAPI);    
   }
 
   async function createNote(event) {
@@ -83,13 +96,25 @@ const ArticlesPage = () => {
     }
   }
 
-  async function debateNote(note) {
+  async function refreshNote(note) {
+    notes.map(async (nt)=>{
+      if (note.id === nt.id) {
+        nt.args = await aiNote(note, 'list supporting arguments');
+        nt.facts = await aiNote(note, 'list facts'); 
+      }
+      return nt;
+    })
+    setNotes(notes);
+  }
+
+  async function aiNote(note, action = '') {
     //const newNotes = notes.filter((note) => note.id !== id);
     try {
       const resp = await fetch("https://9xsl4q3gdk.execute-api.us-east-2.amazonaws.com/Prod/getPrompt", {
         method: "POST",
         body: JSON.stringify({
-          data: 'Debate:' +  note.name }
+          data: action + ':' + note.name
+        }
         ),
         headers: {
           "Content-type": "application/json;"
@@ -97,9 +122,9 @@ const ArticlesPage = () => {
       });
       const body = await resp.body;
       const reader = body.getReader();
-      console.dir(reader);
+      //console.dir(reader);
       const txt = await reader.read();
-      alert(new TextDecoder().decode(txt.value));
+      return new TextDecoder().decode(txt.value);
     } catch {
       setAlertActive(true);
     }
@@ -108,6 +133,10 @@ const ArticlesPage = () => {
   useEffect(() => {
     fetchNotes();
   }, []);
+
+  useEffect(() => {
+    fetchAi();
+  }, [notes.length]);
 
   return (
 
@@ -125,38 +154,66 @@ const ArticlesPage = () => {
         <Col className='context-col'>
           <View className="articles">
             <View>
-              {notes.map((note) => (
-                <Flex
-                  className="articles-list"
-                  key={note.id || note.name}
-                  direction="row"
-                  justifyContent="left"
-                  alignItems="center"
-                >
-                  <Text as="strong" className="f1" fontWeight={700}>
-                    {note.name}
-                  </Text>
-                  <Text className="f2" as="span">{note.description}</Text>
-                  {note.image && (
-                    <Image
-                      className="fs"
-                      src={note.image}
-                      alt={`visual aid for ${notes.name}`}
-                    />
-                  )}
+              {notes.map((note) => {
 
-                  {route === 'authenticated' && (
-                    <div>
-                      <Button variation="link" onClick={() => deleteNote(note)}>
-                        Delete
-                      </Button>
-                      <Button variation="link" onClick={() => debateNote(note)}>
-                        Debate
-                      </Button>
+                return (
+                <>
+                  <Flex
+                    className="articles-list"
+                    key={note.id || note.name}
+                    direction="row"
+                    justifyContent="left"
+                    alignItems="center"
+                  >
+                    <Text as="strong" className="f1" fontWeight={700}>
+                      {note.name}
+                    </Text>
+                    <Text className="f2" as="span">{note.description}</Text>
+                    {note.image && (
+                      <Image
+                        className="fs"
+                        src={note.image}
+                        alt={`visual aid for ${notes.name}`}
+                      />
+                    )}
+
+                    {route === 'authenticated' && (
+                      <div style={{ 'display': 'table-column', textAlign: 'left' }}>
+                        <div>
+                          <Button title="Update article" variation="link" onClick={() => deleteNote(note)}>
+                            Edit
+                          </Button>
+                        </div>
+                        <div>
+                          <Button title="Delete article" variation="link" onClick={() => deleteNote(note)}>
+                            Delete
+                          </Button>
+                        </div>
+
+                      </div>
+                    )}
+                  </Flex>
+                  <Flex
+                    className="arguments-list"
+                    key={`args-${notes.name}`}
+                    direction="row"
+                    justifyContent="left"
+                    alignItems="center"
+                  >
+                    <div className='args-close'>
+                      <Text className="f2" as="strong">
+                          {note.args }
+                      </Text>
+                      <Text className="f2" as="span">
+                          { note.facts}
+                      </Text>
                     </div>
-                  )}
-                </Flex>
-              ))}
+                      <Button title="A&F AI fetches arguments" variation="link" onClick={(e) => {if(!note.facts) {refreshNote(note)}; e.target.parentNode.firstChild.classList.remove('args-close')}}>
+                        {note.facts ? 'See what AI Bot think' : 'AI Bot reterving latest information ...'}
+                      </Button>
+                  </Flex>
+                </>
+              )})}
             </View>
 
             {user?.username &&
