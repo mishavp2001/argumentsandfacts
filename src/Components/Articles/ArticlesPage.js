@@ -208,8 +208,8 @@ const ArticlesPage = () => {
                           { note.facts}
                       </Text>
                     </div>
-                      <Button title="A&F AI fetches arguments" variation="link" onClick={(e) => {if(!note.facts) {refreshNote(note)}; e.target.parentNode.firstChild.classList.remove('args-close')}}>
-                        {note.facts ? 'See what AI Bot think' : 'AI Bot reterving latest information ...'}
+                      <Button title="A&F fetches arguments and facts" variation="link" onClick={(e) => {if(!note.facts) {refreshNote(note)}; e.target.parentNode.firstChild.classList.remove('args-close')}}>
+                        {!note.facts && 'A&F Bot thoughts are here'}
                       </Button>
                   </Flex>
                 </>
