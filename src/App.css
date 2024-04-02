@@ -1,6 +1,7 @@
 
 body {
   background-color: black;
+  font-size: medium;
 }
 
 
@@ -68,7 +69,8 @@ body {
     .navbar-brand {
       font-size: 2.2em;
       font-weight: 700;
-      color: rgb(255 255 255)
+      color: rgb(255 255 255);
+      margin-left: 1em;
     }
   }
 
@@ -152,18 +154,18 @@ body {
     color: black;
   }
 
-  .arguments-list {
-  
-  }
   .args-close{
     display: none; 
   }
   .accordion-articles {
-    background-color: rgb(193 193 193);
+    background-color:rgb(255, 255, 255);
  
 
     .amplify-accordion__item__trigger .amplify-text {
       font-size: x-large;
+      display: list-item;          /* This has to be "list-item"                                               */
+      list-style-type: square;     /* See https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type     */
+      list-style-position: inside;
     }
   }
   
@@ -175,7 +177,10 @@ body {
     {
     padding: 1em;
     background-color: white;
-    border: 2px solid rgb(48, 86, 213);
+    padding: 1em;
+    margin: 1em;
+    background-color: white;
+    border-top: 2px solid rgb(173 177 205);
 
     .f1 {
       flex: 1 0 120px;

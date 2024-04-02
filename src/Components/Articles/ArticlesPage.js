@@ -165,7 +165,7 @@ const ArticlesPage = () => {
                     <Accordion.Container className="accordion-articles" defaultValue={['item-0']}>
                       <Accordion.Item value={`item-${index}`}>
                         <Accordion.Trigger>
-                          <Text as="strong" fontWeight={700}>
+                          <Text as="strong" fontWeight={400}>
                             {note.name}
                           </Text>
                           <Accordion.Icon />
@@ -213,10 +213,11 @@ const ArticlesPage = () => {
                             justifyContent="left"
                             alignItems="center"
                           >
-                            <Button title="A&F fetches arguments and facts" variation="link" onClick={(e) => { if (!note.facts) { refreshNote(note) }; e.target.parentNode.children[1].classList.remove('args-close') }}>
+                            {/* onClick={(e) => { if (!note.facts) { refreshNote(note) }; e.target.parentNode.children[1].classList.remove('args-close') }} */}
+                            <span  className="f1"  title="A&F fetches arguments and facts" variation="link" >
                               {!note.facts ? 'A&F Bot is fetching information ...' : 'A&F Bot says'}
-                            </Button>
-                            <div className='args-close'>
+                            </span>
+                            <div className={!note.facts & 'args-close'}>
                               <Text className="f2" as="strong">
                                 {note.args}
                               </Text>
@@ -241,14 +242,14 @@ const ArticlesPage = () => {
                     <span>Publish your article</span>
                     <TextField
                       name="name"
-                      placeholder="Statment"
+                      placeholder="Statment. Compose a concise sentence articulating a belief you hold strongly."
                       label="Statment"
                       labelHidden
                       variation="quiet"
                       required />
                     <TextField
                       name="description"
-                      placeholder="Argemnet & Facts"
+                      placeholder="Outline the supporting arguments and facts validating the truth of your statement.acts"
                       label="Argemnet"
                       labelHidden
                       variation="quiet"
