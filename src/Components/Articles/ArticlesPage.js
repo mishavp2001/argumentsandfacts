@@ -178,7 +178,6 @@ const ArticlesPage = () => {
                             key={note.id || note.name}
                             direction="row"
                             justifyContent="left"
-                            alignItems="center"
                           >
                             <div className="f1" >
                               <Text className="f2" as="span">{note.description}</Text>

@@ -184,7 +184,6 @@ const ArgumentsPage = () => {
                             key={argument.id || argument.name}
                             direction="row"
                             justifyContent="left"
-                            alignItems="center"
                           >
                             <div className="f1" >
                               <h3>
