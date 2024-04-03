@@ -34,7 +34,7 @@ console.dir( path.pathname, route);
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href='/articles' className={path.pathname === "/articles" ? "selected" : ""}>Articles</Nav.Link>
+                        <Nav.Link href='/arguments' className={path.pathname === "/arguments" ? "selected" : ""}>Arguments</Nav.Link>
                         <Nav.Link href='/debates' className={path.pathname === "/debates" ? "selected" : ""}>Debates</Nav.Link>
                         <Nav.Link href='/about' className={path.pathname === "/about" ? "selected" : ""}>About</Nav.Link>
                     </Nav>
@@ -45,7 +45,7 @@ console.dir( path.pathname, route);
                     </Form>
                     <Nav className='ms-md-auto login-nav'>
                         {authStatus === 'authenticated' ?
-                            <NavDropdown title={user.username} id="email">
+                            <NavDropdown title={user?.username} id="email">
                                 <Nav.Link href="/profile">Profile</Nav.Link>
                                 <Nav.Link onClick={handleLogOut}>Logout</Nav.Link>
                             </NavDropdown> :

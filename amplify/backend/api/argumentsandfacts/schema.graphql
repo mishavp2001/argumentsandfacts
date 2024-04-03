@@ -1,4 +1,15 @@
-type Note @model @auth(rules: [{allow: owner}, {allow: public, operations: [read]}]) {
+type Argument @model @auth(rules: [{allow: public, operations: [read]}, {allow: owner}]) {
+  id: ID!
+  title: String!
+  arguments: [String]
+  description: String!
+  aiarguments: String
+  strength: Int
+  public: Boolean
+  image: String
+}
+
+type Note @model @auth(rules: [{allow: owner}, {allow: public, operations: [read]}, {allow: public, operations: [create, read], provider: iam}]) {
   id: ID!
   name: String!
   description: String

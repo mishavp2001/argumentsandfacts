@@ -10,6 +10,7 @@ import {
   TextField,
   View,
   Alert,
+  Divider,
 } from "@aws-amplify/ui-react";
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { generateClient } from 'aws-amplify/api';
@@ -30,6 +31,7 @@ const ArticlesPage = () => {
 
   const { route, user, signOut } = useAuthenticator((context) => [
     context.route,
+    context.user,
     context.signOut,
   ]);
 
@@ -239,17 +241,17 @@ const ArticlesPage = () => {
               <div className="article-publish">
                 <View as="form" margin="3rem 0" onSubmit={createNote}>
                   <Flex direction="column" justifyContent="left">
-                    <span>Publish your article</span>
+                    <span>Publish Argument</span>
                     <TextField
                       name="name"
-                      placeholder="Statment. Compose a concise sentence articulating a belief you hold strongly."
+                      placeholder="Argument - compose a concise sentence articulating a belief you hold strongly."
                       label="Statment"
                       labelHidden
                       variation="quiet"
                       required />
                     <TextField
                       name="description"
-                      placeholder="Outline the supporting arguments and facts validating the truth of your statement.acts"
+                      placeholder="Add supporting arguments and facts validating the truth of your statement."
                       label="Argemnet"
                       labelHidden
                       variation="quiet"

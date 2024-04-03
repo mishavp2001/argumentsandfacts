@@ -1,6 +1,69 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createArgument = /* GraphQL */ `
+  mutation CreateArgument(
+    $input: CreateArgumentInput!
+    $condition: ModelArgumentConditionInput
+  ) {
+    createArgument(input: $input, condition: $condition) {
+      id
+      title
+      arguments
+      description
+      aiarguments
+      strength
+      public
+      image
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const updateArgument = /* GraphQL */ `
+  mutation UpdateArgument(
+    $input: UpdateArgumentInput!
+    $condition: ModelArgumentConditionInput
+  ) {
+    updateArgument(input: $input, condition: $condition) {
+      id
+      title
+      arguments
+      description
+      aiarguments
+      strength
+      public
+      image
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteArgument = /* GraphQL */ `
+  mutation DeleteArgument(
+    $input: DeleteArgumentInput!
+    $condition: ModelArgumentConditionInput
+  ) {
+    deleteArgument(input: $input, condition: $condition) {
+      id
+      title
+      arguments
+      description
+      aiarguments
+      strength
+      public
+      image
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
 export const createNote = /* GraphQL */ `
   mutation CreateNote(
     $input: CreateNoteInput!

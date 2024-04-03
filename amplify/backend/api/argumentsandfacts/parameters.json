@@ -3,7 +3,7 @@
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "CreateAPIKey": 1,
   "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2024-03-27T21:12:05.167Z",
+  "AuthModeLastUpdated": "2024-04-02T19:25:47.152Z",
   "AuthCognitoUserPoolId": {
     "Fn::GetAtt": [
       "authargumentsandfacts14a21475",

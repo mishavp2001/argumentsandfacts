@@ -10,14 +10,12 @@ import {Login} from './Components/Auth/Login';
 import Profile from './Components/Home/Profile';
 import DebatesPage from './Components/Home/DebatesPage';
 
+
 import { Route, Routes } from 'react-router-dom';
 import { Row, Col, Container, Image, Button, Nav } from 'react-bootstrap';
 
 import { Amplify } from 'aws-amplify';
-import {
-  fetchAuthSession,
-  getCurrentUser
-} from 'aws-amplify/auth';
+
 
 import { AuthModeStrategyType } from 'aws-amplify/datastore';
 import { Authenticator, useTheme, Text  } from '@aws-amplify/ui-react';
@@ -25,12 +23,17 @@ import awsExports from './aws-exports';
 
 import './App.css';
 import '@aws-amplify/ui-react/styles.css';
-import ArticlesPage from './Components/Articles/ArticlesPage';
+import ArgumentsPage from './Components/Arguments/ArgumentsPage';
 import AboutPage from './Components/About/AboutPage';
 
 import { RequireAuth } from './Components/Auth/RequireAuth';
 import { Layout } from './Components/Common/Layout';
+import {
+  fetchAuthSession,
+  getCurrentUser
+} from 'aws-amplify/auth';
 
+const authToken = (await fetchAuthSession()).tokens?.idToken?.toString();
 const getAuthenticatedUser = async () => {
   const {
     username,
@@ -48,12 +51,15 @@ const getAuthenticatedUser = async () => {
     authenticationFlowType: signInDetails.authFlowType
   };
 }
-Amplify.configure({
-  ...awsExports,
-  DataStore: {
-    authModeStrategyType: AuthModeStrategyType.MULTI_AUTH
-  }}
-);
+Amplify.configure(awsExports, {
+  API: {
+    REST: {
+      headers: async () => {
+        return { Authorization: authToken };
+      }
+    }
+  }
+});
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -94,7 +100,7 @@ function App() {
                         <Route index path='/' exact={true} element = {<HomePage/>} />
                         <Route path='/login' element = {<Login/>} />
                         <Route path='/profile' element = {<Profile />} />
-                        <Route path='/articles' element = {<ArticlesPage/>} />
+                        <Route path='/arguments' element = {<ArgumentsPage/>} />
                         <Route path='/politics' element = {<RequireAuth><DebatesPage /></RequireAuth>} />
                         <Route path='/sports' element = {<RequireAuth><DebatesPage /></RequireAuth>} />
                         <Route path='/religion' element = {<RequireAuth><DebatesPage /></RequireAuth>} />

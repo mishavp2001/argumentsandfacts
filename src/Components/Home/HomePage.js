@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Container, Image, Button, Nav } from 'react-bootstrap';
 import SideBar from '../Common/SideBar';
-import ArticlesPage from '../Articles/ArticlesPage'
+import ArgumentsPage from '../Arguments/ArgumentsPage'
 import { useAuthenticator, Alert } from '@aws-amplify/ui-react';
 
 function HomePage() {
@@ -20,7 +20,7 @@ function HomePage() {
                         Therefore, seize this opportunity to express your views and ensure your voice is heard
                         loud and clear! {!user && <a href='/login'>Create your account to express your thoughts!</a>}
                     </Alert>
-                        <ArticlesPage />
+                        <ArgumentsPage />
                      </Col>   
                     <Col className='side-bar-col' sm={2}>
                        <SideBar />    
