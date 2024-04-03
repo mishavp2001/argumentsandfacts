@@ -260,13 +260,12 @@ const ArgumentsPage = () => {
                       variation="quiet"
                       required />
                     <StepperField
-                      label="Strength"
+                      label="Rate argument strength"
                       name="strength"
                       min={0}
                       max={10}
                       step={1}
                       defaultValue={1}
-                      width='40px'
                     />
                     
                     <Flex
