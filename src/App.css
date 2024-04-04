@@ -172,11 +172,20 @@ body {
       list-style-position: inside;
     }
   }
-  .chat-text .amplify-textarea, .amplify-input {
+
+.topic .amplify-input {
+    border-radius: 0;
+    background-color: #f8f8f8;
+    color: #000000;
+  }
+
+.topic {
+  .chat-text .amplify-textarea {
     border-radius: 0;
     background-color: #000000;
     color: #ffff;
   }
+}  
   .amplify-accordion__item__body {
     color: var(--amplify-colors-white);
   }

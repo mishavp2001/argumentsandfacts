@@ -93,10 +93,11 @@ const TopicPage = () => {
         }
       });
       const body = await resp.body;
+      debugger;
       const reader = body.getReader();
       //console.dir(reader);
       const txt = await reader.read();
-      return new TextDecoder().decode(txt.value);
+      return JSON.parse(new TextDecoder().decode(txt.value)).body.data[1].content[0].text.value
     } catch {
       setAlertActive(true);
     }
@@ -124,7 +125,7 @@ const TopicPage = () => {
       }
       {topic?.title &&
         <Row>
-          <Col className='context-col'>
+          <Col className='topic context-col'>
             <View className="articles">
               <View>
                 <div key={`topic-${topic.title}`}>
@@ -177,18 +178,16 @@ const TopicPage = () => {
 
                   <TextField
                     descriptiveText="Type your question for AI Bot"
-
                     onKeyUp={async (evt) => {
                       const text = evt.target.value;
                       if (evt?.key === "Enter") {
-                        console.log("Hello", text)
+                        evt.target.value = 'Waiting for response from AI bot .....';
+                        document.getElementById("chat").value = document.getElementById("chat").value  + 'Client:' + text  + '\n';
                         const ai = await aiArgument(text, "Answer");
                         evt.target.value = '';
-                        document.getElementById("chat").value = document.getElementById("chat").value  + 'Client:' + text + '\n' + "AI Bot:" + ai + '\n';
+                        document.getElementById("chat").value = document.getElementById("chat").value  + "AI Bot says:" + ai + '\n';
                       }
                     }} />
-
-
                 </div>
               </View>
             </View>
