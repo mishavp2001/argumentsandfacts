@@ -12,6 +12,9 @@ import DebatesPage from './Components/Home/DebatesPage';
 
 
 import { Route, Routes } from 'react-router-dom';
+import { useLocation } from "react-router";
+import { useSearchParams } from "react-router-dom";
+
 import { Row, Col, Container, Image, Button, Nav } from 'react-bootstrap';
 
 import { Amplify } from 'aws-amplify';
@@ -25,6 +28,7 @@ import './App.css';
 import '@aws-amplify/ui-react/styles.css';
 import ArgumentsPage from './Components/Arguments/ArgumentsPage';
 import AboutPage from './Components/About/AboutPage';
+import Topic from './Components/Topics/TopicPage';
 
 import { RequireAuth } from './Components/Auth/RequireAuth';
 import { Layout } from './Components/Common/Layout';
@@ -63,6 +67,9 @@ Amplify.configure(awsExports, {
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  let [searchParams, setSearchParams] = useSearchParams();
+
+  const showNav = searchParams.get('nav')!='false' ? true : false ;
 
   const assessLoggedInState = () => {
     getAuthenticatedUser()
@@ -89,17 +96,19 @@ function App() {
   };
 
   return (
+
     <Authenticator.Provider>
       <div>
-      <NavigationBar signOut={signOut} loggedIn={loggedIn}/>
+       <NavigationBar showNav={showNav} signOut={signOut} loggedIn={loggedIn}/>
       <Container fluid className='my-5 app-body'>
                 <Row >
                     <Col sm={12} className='page-context'>
                       <Routes>
-                      <Route path="/" element={<Layout />}>
+                      <Route element={<Layout />}>
                         <Route index path='/' exact={true} element = {<HomePage/>} />
                         <Route path='/login' element = {<Login/>} />
-                        <Route path='/profile' element = {<Profile />} />
+                        <Route path="/profile/:name?" element = {<Profile />} />
+                        <Route path='/topic/:owner?' element = {<Topic />} />
                         <Route path='/arguments' element = {<ArgumentsPage/>} />
                         <Route path='/politics' element = {<RequireAuth><DebatesPage /></RequireAuth>} />
                         <Route path='/sports' element = {<RequireAuth><DebatesPage /></RequireAuth>} />

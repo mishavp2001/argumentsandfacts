@@ -15,6 +15,7 @@ const NavigationBar = props => {
         context.authStatus,
         context.signOut
     ]);
+  
     const navigate = useNavigate();
     const path = useResolvedPath();
 
@@ -29,9 +30,11 @@ console.dir( path.pathname, route);
         <header>
             <Navbar variant="dark" expand="lg" bg='info' fixed='top'>
                 <Navbar.Brand className={`brand ${path.pathname === "/" ? "selected" : ""}`} href="/">
-                    Arguments&Facts
+                    {!props.showNav ? user?.username : 'Arguments&Facts' }
                 </Navbar.Brand>
+              
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                {props.showNav &&
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href='/arguments' className={path.pathname === "/arguments" ? "selected" : ""}>Arguments</Nav.Link>
@@ -53,7 +56,7 @@ console.dir( path.pathname, route);
                         }
                     </Nav>
 
-                </Navbar.Collapse>
+                </Navbar.Collapse>}
             </Navbar>
         </header>
 

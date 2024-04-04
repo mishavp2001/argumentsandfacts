@@ -91,6 +91,9 @@ body {
     @media (max-width: 767px) {
       .articles-list,  .arguments-list {
         flex-direction: column !important;
+        .amplify-rating {
+          font-size: xx-small
+         }
       }
 
       .fs {
@@ -169,7 +172,11 @@ body {
       list-style-position: inside;
     }
   }
-  
+  .chat-text .amplify-textarea, .amplify-input {
+    border-radius: 0;
+    background-color: #000000;
+    color: #ffff;
+  }
   .amplify-accordion__item__body {
     color: var(--amplify-colors-white);
   }
@@ -188,6 +195,7 @@ body {
       margin: 1em;
       width: 120px;;
      }
+
 
     .f1 {
       flex: 1 0 120px;
