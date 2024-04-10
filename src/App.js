@@ -3,12 +3,12 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState } from 'react';
 import { useEffect } from 'react';
-import NavigationBar from './Components/Common/NavigationBar';
-import FooterBar from './Components/Common/FooterBar ';
-import HomePage from './Components/Home/HomePage';
-import {Login} from './Components/Auth/Login';
-import Profile from './Components/Home/Profile';
-import DebatesPage from './Components/Home/DebatesPage';
+import NavigationBar from './components/Common/NavigationBar';
+import FooterBar from './components/Common/FooterBar ';
+import HomePage from './components/Home/HomePage';
+import {Login} from './components/Auth/Login';
+import Profile from './components/Home/Profile';
+import DebatesPage from './components/Home/DebatesPage';
 
 
 import { Route, Routes } from 'react-router-dom';
@@ -26,12 +26,12 @@ import awsExports from './aws-exports';
 
 import './App.css';
 import '@aws-amplify/ui-react/styles.css';
-import ArgumentsPage from './Components/Arguments/ArgumentsPage';
-import AboutPage from './Components/About/AboutPage';
-import Topic from './Components/Topics/TopicPage';
+import ArgumentsPage from './components/Arguments/ArgumentsPage';
+import AboutPage from './components/About/AboutPage';
+import Topic from './components/Topics/TopicPage';
 
-import { RequireAuth } from './Components/Auth/RequireAuth';
-import { Layout } from './Components/Common/Layout';
+import { RequireAuth } from './components/Auth/RequireAuth';
+import { Layout } from './components/Common/Layout';
 import {
   fetchAuthSession,
   getCurrentUser

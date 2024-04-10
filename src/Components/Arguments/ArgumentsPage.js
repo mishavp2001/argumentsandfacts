@@ -20,7 +20,7 @@ import { generateClient } from 'aws-amplify/api';
 import { createArgument as createArgumentMutation, deleteArgument as deleteArgumentMutation } from '../../graphql/mutations';
 import { listArguments, getArguments } from "../../graphql/queries";
 import { uploadData, getUrl, remove } from 'aws-amplify/storage';
-
+import {fetchGPTPrompt} from '../../services/api'
 import { fetchAuthSession } from 'aws-amplify/auth'
 
 
@@ -123,21 +123,7 @@ const ArgumentsPage = () => {
   async function aiArgument(argument, action = '') {
     //const newargs = args.filter((argument) => argument.id !== id);
     try {
-      const resp = await fetch("https://9xsl4q3gdk.execute-api.us-east-2.amazonaws.com/Prod/getPrompt", {
-        method: "POST",
-        body: JSON.stringify({
-          data: action + ':' + argument
-        }
-        ),
-        headers: {
-          "Content-type": "application/json;"
-        }
-      });
-      const body = await resp.body;
-      const reader = body.getReader();
-      //console.dir(reader);
-      const txt = await reader.read();
-      return new TextDecoder().decode(txt.value);
+      return await fetchGPTPrompt(argument, action = '');
     } catch {
       setAlertActive(true);
     }
